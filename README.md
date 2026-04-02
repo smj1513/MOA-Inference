@@ -19,6 +19,8 @@
 모아는 소비를 기록하는 데서 끝나지 않고, 거래 데이터를 분석하여 목표 달성률, 자유소비 가능 금액, 조정이 필요한 지출 항목을 함께 제시합니다. 이 결과는 알림, 코칭, 시각화와 연결되어 현재 재무 상태를 빠르게 이해할 수 있도록 돕습니다.
 
 ## 프로젝트 구조
+<img width="1510" height="1052" alt="image (4)" src="https://github.com/user-attachments/assets/5d611d89-5e01-4810-9a23-3e3313372d73" />
+
 운영 코드는 `app/` 아래에 두고, 실험과 학습 노트북은 `lab/` 아래에 분리했습니다. 공통 설정과 모델 로더는 `app/core/`에 두고, 실제 기능은 `app/domain/<도메인>/` 아래에 둡니다. 각 도메인은 API, service, repository, entity, agents 단위로 구성하여 역할을 분리했습니다.
 
 ```text
@@ -196,6 +198,9 @@ v3_results = train_and_evaluate_experiment(
 운영 후처리에서는 model confidence가 지정한 threshold를 넘지 못하면 fallback label인 `기타서비스`로 분류하도록 했습니다. 잘못된 카테고리를 확정하는 것보다 보수적으로 처리하는 편이, 이후 소비 분석 결과의 신뢰도를 유지하는 데 더 적합하다고 판단했습니다.
 
 #### 결과
+<img width="2500" height="877" alt="image" src="https://github.com/user-attachments/assets/56cf6e4a-ce85-4fcb-846d-b6fee40ca4f1" />
+<img width="876" height="640" alt="image" src="https://github.com/user-attachments/assets/91268cca-e2e4-4c9b-8b62-3a591477f23a" />
+
 baseline과 비교했을 때 `v3`의 `service_test f1_macro`는 `0.7825 -> 0.8308`로 개선되었습니다. 동일한 데이터와 평가 기준에서 약 5%p 수준의 향상을 확인했습니다. 전처리, Attention Pooling Head, noise augmentation, confidence fallback을 함께 적용하여 예측 성능과 분석 안정성을 같이 확보했습니다.
 
 ### 2. 소비 분석 코칭 AI 에이전트 개발
@@ -335,14 +340,5 @@ You create concise, production-ready prompts for Gemini image generation models.
 python -m uv sync --extra dev
 python -m uv run uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
-
-실행 시에는 `AI_API_KEY`, `OPENAI_BASE_URL`, `MORE_FINANCE_MCP_URL`, `GOOGLE_AI_BASE_URL` 같은 환경변수가 필요할 수 있습니다. 세부 실행 메모는 [run.md](./run.md)를 참고하면 됩니다.
-
-## 관련 문서
-- [README.example.md](./README.example.md)
-- [run.md](./run.md)
-- [MOA README 설계 문서](./docs/plans/2026-04-01-moa-readme-design.md)
-- [MOA README 구현 계획](./docs/plans/2026-04-01-moa-readme.md)
-- [가맹점 분류 v3 정렬 문서](./docs/plans/2026-04-01-merchant-classifier-v3-alignment.md)
-- [가맹점 분류 frozen baseline vs v3 계획](./docs/plans/2026-03-29-koelectra-frozen-baseline-vs-v3-plan.md)
-- LangGraph MCP 사용 문서: `../more-be/BE/amagetdone/LANGGRAPH_MCP_USAGE.md`
+## 관련 링크
+- 가맹점 명 기반 소비 분류 모델 : https://huggingface.co/kakao1513/merchant-consumption-category-discriminator-v3
