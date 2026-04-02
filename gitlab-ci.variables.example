@@ -1,0 +1,10 @@
+# GitLab CI/CD Variables example for a self-hosted runner that
+# builds and deploys on the same machine.
+# Register these in GitLab:
+# Settings > CI/CD > Variables
+
+LOCAL_IMAGE_NAME=merchant-inference-service
+DEPLOY_ENV_FILE=/home/ubuntu/inference/.env
+DEPLOY_CONTAINER_NAME=merchant-inference-service
+DEPLOY_PORT_MAP=8000:8000
+DEPLOY_NETWORK_ALIAS=inference-server

@@ -1,0 +1,17 @@
+.git
+.venv
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+.env
+.env.*
+!.env.example
+
+tests
+lab
+docs
+merchant_inference_service.egg-info
+AGENTS.md

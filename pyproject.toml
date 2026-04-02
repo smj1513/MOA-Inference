@@ -1,0 +1,48 @@
+[project]
+name = "merchant-inference-service"
+version = "0.1.0"
+description = "FastAPI service for merchant category inference"
+requires-python = "==3.12.7"
+dependencies = [
+    "fastapi>=0.115.0,<1.0.0",
+    "uvicorn>=0.34.0,<1.0.0",
+    "transformers>=4.49.0,<5.0.0",
+    "torch>=2.6.0,<3.0.0",
+    "pydantic-settings>=2.8.0,<3.0.0",
+    "pandas>=2.2.0,<3.1.0",
+    "langchain>=1.0.0,<2.0.0",
+    "langgraph>=1.0.2,<2.0.0",
+    "langchain-openai>=1.0.0,<2.0.0",
+    "langchain-mcp-adapters>=0.1.0,<1.0.0",
+    "mcp>=1.0.0,<2.0.0",
+    "sqlalchemy>=2.0.0,<3.0.0",
+    "psycopg[binary]>=3.2.0,<4.0.0",
+    "httpx>=0.28.0,<1.0.0",
+    "langfuse>=3.0.0,<4.0.0",
+    "langchain-classic>=1.0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0,<9.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-p no:cacheprovider"
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
